@@ -1,35 +1,35 @@
-def maxRec(height):
-  # 计算直方图中的最大矩形面积
-  res = 0
-  length = len(list(height))
-  for i in range(length):
-    if i+1<length and height[i]<height[i+1]:
-      continue
-    minH = height[i]
+import pprint
 
-    for j in range(i,-1,-1):
-      minH = min(minH, height[j])
-      area = minH * (i-j+1)
-      res = max(res, area)
-  return res
 
-data = []
-while 1:
-  try:
-  	data.append(list(map(int, input().strip().split())))
-  except Exception as e:
-  	break
+def count_matrix(result_arr, i, j, k, l):
+    count = 0
+    for raw in range(i, k+1):
+        for col in range(j, l+1):
+            if result_arr[raw][col] == 1:
+                count += 1
+            else:
+                return 0
+    return count
 
-res = 0
-row = len(data)
-col = len(data[0])
-height = [0]*col
 
-for i in range(row):
-  for j in range(col):
-  	if data[i][j] == 0:
-  	  height[j] = 0
-  	else:
-  	  height[j] += 1
-  res = max(res, maxRec(height))
-print(res)
+if __name__ == '__main__':
+    result_arr = []
+
+    try:
+        while True:
+            i = input()
+            sub_arr = list(map(int, i.strip().split(' ')))
+            result_arr.append(sub_arr)
+    except EOFError:
+        pass
+    except ValueError:
+        pass
+    max_arr = []
+    # 暴力统计所有子矩阵情况
+    for i in range(len(result_arr)):
+        for j in range(len(result_arr[0])):
+            for k in range(i, len(result_arr)):
+                for l in range(j, len(result_arr[0])):
+                    max_arr.append(count_matrix(result_arr, i, j, k, l))
+
+print(max(max_arr))

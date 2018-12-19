@@ -1,12 +1,57 @@
-#先升后降
-#从一列数中筛除尽可能少的数使得从左往右看，这些数是从小到大再从大到小的
+# # 确定中间数 以中间数为基准左右删除
+# num_strarr = input().split(' ')
+# num_arr = []
+# for i in num_strarr:
+#     num_arr.append(int(i))
+#
+# index_arr = []
+# # 先找出中间数
+# for i in range(0,len(num_arr)):
+#     if i == 0:
+#         if num_arr[i] >= num_arr[i+1]:
+#             index_arr.append(i)
+#     elif i == len(num_arr) - 1:
+#         if num_arr[i] >= num_arr[i-1]:
+#             index_arr.append(i)
+#     else:
+#         if num_arr[i] >= num_arr[i+1] and num_arr[i] >= num_arr[i-1]:
+#             index_arr.append(i)
+#
+# result_dict = []
+# # 开始进行删除操作
+# for i in index_arr:
+#     index = num_arr[i]
+#     temp_arr = num_arr.copy()
+#     for j in range(len(temp_arr)-1, 0, -1):
+#         if j == len(temp_arr) - 1:
+#             if temp_arr[j] > index:
+#                 del temp_arr[j]
+#         elif j == 0:
+#             if temp_arr[0] > index:
+#                 del temp_arr[j]
+#         elif j < i:
+#             if temp_arr[j] > index or temp_arr[j] > temp_arr[j+1]:
+#                 del temp_arr[j]
+#         elif j > i:
+#             if temp_arr[j] > index or temp_arr[j] < temp_arr[j+1]:
+#                 del temp_arr[j]
+#     result_dict.append(temp_arr)
+#
+# # 统计最长的数组
+# max_num = 0
+# for i in result_dict:
+#     if len(i) > max_num:
+#         max_num = len(i)
+#
+# result_str = ''
+# for i in result_dict:
+#     if len(i) == max_num:
+#         for j in i:
+#             result_str += str(j) + ' '
+#         print(result_str.strip())
+#     result_str = ''
 
-
-#先将数组划分为升序或者降序的排列
 def LIS(a):
-    '''
-    求最长子序列，返回 长度，子序列
-    '''
     a = list(a)
     length = len(a)
     num = [1] * length  # DP中记录每个位置为末尾的最大LIS长度
@@ -68,4 +113,3 @@ for i in range(len(len_res)):
         else:
             m.extend(n)
         print_res(m)
-
